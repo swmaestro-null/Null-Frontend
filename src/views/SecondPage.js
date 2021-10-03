@@ -1,20 +1,58 @@
-import { Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import React from 'react'
 
-const SecondPage = () => {
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Create Awesome 🙌</CardTitle>
-      </CardHeader>
-      <CardBody>
-        <CardText>This is your second page.</CardText>
-        <CardText>
-          Chocolate sesame snaps pie carrot cake pastry pie lollipop muffin. Carrot cake dragée chupa chups jujubes.
-          Macaroon liquorice cookie wafer tart marzipan bonbon. Gingerbread jelly-o dragée chocolate.
-        </CardText>
-      </CardBody>
-    </Card>
-  )
+import 'tui-image-editor/dist/tui-image-editor.css'
+import ImageEditor from '@toast-ui/react-image-editor'
+
+
+const myTheme = {
+  // Theme object to extends default dark theme.
+
 }
 
+const SecondPage = () => (
+  <ImageEditor
+    includeUI={{
+      loadImage: {
+        path: 'img/sampleImage.jpg',
+        name: 'SampleImage'
+      },
+      theme: myTheme,
+      menu: ['shape', 'filter', 'draw'],
+      initMenu: 'filter',
+      uiSize: {
+        width: '80%',
+        height: '700px'
+      },
+      menuBarPosition: 'bottom'
+    }}
+    cssMaxHeight={500}
+    cssMaxWidth={700}
+    selectionStyle={{
+      cornerSize: 20,
+      rotatingPointOffset: 70
+    }}
+    usageStatistics={true}
+  />
+)
+
+
+const imageEditorOptions = {
+  // sort of option properties.
+}
+
+const MyComponent = () => {
+  const editorRef = React.createRef()
+
+  const handleClickButton = () => {
+    const editorInstance = editorRef.current.getInstance()
+
+    editorInstance.flipX()
+  }
+  return (
+    <>
+      <ImageEditor ref={editorRef} {...imageEditorOptions} />
+      <button onClick={handleClickButton}>Flip image by X Axis!</button>
+    </>
+  )
+}
 export default SecondPage
