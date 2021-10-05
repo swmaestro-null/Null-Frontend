@@ -16,6 +16,7 @@ const PricingTrial = () => {
             </div>
             <img
               className='pricing-trial-img img-fluid'
+              src={trialSvg}
               alt='trial svg'
               style={{
                 transform: 'scaleX(1)'

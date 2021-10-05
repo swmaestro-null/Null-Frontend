@@ -32,6 +32,7 @@ const Pricing = () => {
   return (
     <div id='pricing-table'>
       <PricingHeader duration={duration} setDuration={setDuration} />
+      {data}
       {data !== null && faq !== null ? (
         <Fragment>
           <PricingCards data={data} duration={duration} />

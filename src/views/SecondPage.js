@@ -9,6 +9,15 @@ const myTheme = {
 
 }
 
+const imageEditor = () => new tui.component.ImageEditor('.tui-image-editor canvas', {
+  cssMaxWidth: document.documentElement.clientWidth,
+  cssMaxHeight: document.documentElement.clientHeight,
+  selectionStyle: {
+    cornerSize: 50,
+    rotatingPointOffset: 100
+  }
+})
+
 const SecondPage = () => (
   <ImageEditor
     includeUI={{
@@ -18,7 +27,7 @@ const SecondPage = () => (
       },
       theme: myTheme,
       menu: ['shape', 'filter', 'draw'],
-      initMenu: 'filter',
+      initMenu: 'draw',
       uiSize: {
         width: '80%',
         height: '700px'

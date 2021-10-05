@@ -1,4 +1,4 @@
-import { Mail, Home } from 'react-feather'
+import { Mail, Home, Circle } from 'react-feather'
 
 export default [
   {
@@ -16,6 +16,7 @@ export default [
   {
     id: 'pricing',
     title: 'Pricing',
+    icon: <Circle size={12} />,
     permissions: ['admin', 'editor'],
     navLink: '/pricing'
   }
