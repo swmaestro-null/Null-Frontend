@@ -18,6 +18,29 @@ const imageEditor = () => new tui.component.ImageEditor('.tui-image-editor canva
   }
 })
 
+// const SecondPage = new tui.component.ImageEditor('.tui-image-editor canvas', {
+//   includeUI: {
+//     loadImage: {
+//       path: 'img/sampleImage.jpg',
+//       name: 'SampleImage'
+//     },
+//     theme: myTheme,
+//     menu: ['shape', 'filter', 'draw'],
+//     initMenu: 'draw',
+//     uiSize: {
+//       width: '80%',
+//       height: '700px'
+//     },
+//     menuBarPosition: 'bottom'
+//   },
+//   cssMaxWidth: document.documentElement.clientWidth,
+//   cssMaxHeight: document.documentElement.clientHeight,
+//   selectionStyle: {
+//     cornerSize: 50,
+//     rotatingPointOffset: 100
+//   }
+// })
+
 const SecondPage = () => (
   <ImageEditor
     includeUI={{

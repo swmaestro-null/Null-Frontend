@@ -14,6 +14,18 @@ import { Link, useHistory } from 'react-router-dom'
 import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
 import classnames from 'classnames'
 
+const ToastContent = ({ name, role }) => (
+  <Fragment>
+    <div className='toastify-header'>
+      <div className='title-wrapper'>
+        <h6 className='toast-title font-weight-bold'>Welcome, {name}</h6>
+      </div>
+    </div>
+    <div className='toastify-body'>
+      <span>You have successfully logged in as an {role} user to Vuexy. Now you can start to explore. Enjoy!</span>
+    </div>
+  </Fragment>
+)
 
 const Login = () => {
 
@@ -58,7 +70,7 @@ const Login = () => {
               Welcome to ColorAid! 👋
             </CardTitle>
             <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
-            <Form className='auth-login-form mt-2' onSubmit={e => e.preventDefault()}>
+            <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
               <FormGroup>
                 <Label className='form-label' for='login-email'>
                   Email
@@ -97,10 +109,9 @@ const Login = () => {
               <FormGroup>
                 <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
               </FormGroup>
-              <Link to='/Home'><Button.Ripple color='primary' block>
+              <Button.Ripple color='primary' block>
                 Sign in
               </Button.Ripple>
-              </Link>
             </Form>
             <p className='text-center mt-2'>
               <span className='mr-25'>New on our platform?</span>

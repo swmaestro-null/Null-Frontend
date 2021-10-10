@@ -1,6 +1,21 @@
-import { Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import { Row, Col, Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import { useRTL } from '@hooks/useRTL'
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  EffectFade,
+  EffectCube,
+  EffectCoverflow,
+  Autoplay,
+  Lazy,
+  Virtual
+} from 'swiper'
+import { Fragment } from 'react'
+SwiperCore.use([Navigation, Pagination, EffectFade, EffectCube, EffectCoverflow, Autoplay, Lazy, Virtual])
 
 const Home = () => {
+  const [isRtl, setIsRtl] = useRTL()
+
   return (
     <div>
       <Card>

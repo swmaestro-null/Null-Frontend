@@ -46,9 +46,14 @@ const Routes = [
     }
   },
   {
-    path: '/pricing',
-    component: lazy(() => import('../../views/pricing'))
+    path: '/pages/pricing',
+    component: lazy(() => import('../../views/pages/pricing'))
+  },
+  {
+    path: '/swiper',
+    component: lazy(() => import('../../views/swiper'))
   }
+
 ]
 
 export { DefaultRoute, TemplateTitle, Routes }
