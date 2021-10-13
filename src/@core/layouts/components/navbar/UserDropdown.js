@@ -39,7 +39,8 @@ const UserDropdown = () => {
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
-        <Link to='/Login'><Button.Ripple color='primary'>로그인</Button.Ripple></Link>
+        <Link to='/pages/pricing'><Button.Ripple color='primary' style={{ margin: 10 }}>Free</Button.Ripple></Link>
+        <Link to='/Login'><Button.Ripple color='primary'>Login</Button.Ripple></Link>
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
