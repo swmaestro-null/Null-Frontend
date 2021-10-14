@@ -19,11 +19,11 @@ const ToastContent = ({ name, role }) => (
   <Fragment>
     <div className='toastify-header'>
       <div className='title-wrapper'>
-        <h6 className='toast-title font-weight-bold'>Welcome, {name}</h6>
+        <h6 className='toast-title font-weight-bold'>안녕하세요, {name}님!</h6>
       </div>
     </div>
     <div className='toastify-body'>
-      <span>You have successfully logged in as an {role} user to Vuexy. Now you can start to explore. Enjoy!</span>
+      <span>오늘은 어떤 스케치를 칠해드릴까요?</span>
     </div>
   </Fragment>
 )
@@ -50,10 +50,9 @@ const Login = () => {
           dispatch(handleLogin(data))
           console.log(res.data)
           useJwt.setToken(res.data.data.token)
-          console.log(history)
-          //ability.update(res.data.userData.ability)
-          history.push(getHomeRouteForLoggedInUser(res.data.success))
-          console.log(history)
+          // ability.update(res.data.userData.ability)
+          //로그인 성공시 /home으로 이통되도록 하는 history
+          history.push('/')
           toast.success(
             <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
             { transition: Slide, hideProgressBar: true, autoClose: 2000 }

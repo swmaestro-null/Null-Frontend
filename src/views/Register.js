@@ -13,6 +13,17 @@ import { useSkin } from '@hooks/useSkin'
 import { useDispatch } from 'react-redux'
 import { handleLogin } from '@store/actions/auth'
 import { AbilityContext } from '@src/utility/context/Can'
+import { toast } from 'react-toastify'
+
+const ToastContent = () => (
+    <Fragment>
+        <div className='toastify-header'>
+            <div className='title-wrapper'>
+                <h6 className='toast-title font-weight-bold'>회원 가입이 완료되었습니다.</h6>
+            </div>
+        </div>
+    </Fragment>
+)
 
 const Register = () => {
     const ability = useContext(AbilityContext)
@@ -27,6 +38,7 @@ const Register = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
+    const [authenticationNumber, setAuthenicationNumber] = useState('')
     const [valErrors, setValErrors] = useState({})
     const [terms, setTerms] = useState(false)
 
@@ -48,9 +60,12 @@ const Register = () => {
                     } else {
                         setValErrors({})
                         const data = { ...res.data.user, accessToken: res.data.accessToken }
-                        ability.update(res.data.user.ability)
+                        //ability.update(res.data.user.ability)
+                        toast.success(
+                            <ToastContent />
+                        )
                         dispatch(handleLogin(data))
-                        history.push('/')
+                        history.push('/login')
                     }
                 })
                 .catch(err => console.log(err))
@@ -81,6 +96,14 @@ const Register = () => {
         setValErrors(errs)
     }
 
+    //authentication 상태 바꾸는 것
+    const handleauthenticationNumberChange = e => {
+        const errs = valErrors
+        if (errs.authenticationNumber) delete errs.authenticationNumber
+        setAuthenicationNumber(e.target.value)
+        setValErrors(errs)
+    }
+
     const RememberMe = () => {
         return (
             <Fragment>
@@ -100,10 +123,10 @@ const Register = () => {
                         <Link className='brand-logo' to='/' onClick={e => e.preventDefault()}>
                             <img src={Logo} width="80%" height="auto"></img>
                         </Link>
-                        <CardTitle tag='h4' className='mb-1'>
+                        {/*<CardTitle tag='h4' className='mb-1'>
                             Adventure starts here 🚀
                         </CardTitle>
-                        <CardText className='mb-2'>Make your app management easy and fun!</CardText>
+    <CardText className='mb-2'>Make your app management easy and fun!</CardText>*/}
                         <Form className='auth-register-form mt-2' onSubmit={handleSubmit(onSubmit)}>
                             <FormGroup>
                                 <Label className='form-label' for='register-username'>
@@ -163,6 +186,19 @@ const Register = () => {
                                 <Button.Ripple color='primary' style={{ margin: 10 }}>
                                     Authentication
                                 </Button.Ripple>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className='form-label' for='register-Authentication'>
+                                    Authentication Number
+                                </Label>
+                                <Input
+                                    value={authenticationNumber}
+                                    id='register-Authentication'
+                                    name='register-Authentication'
+                                    onChange={handleauthenticationNumberChange}
+                                    className={classnames({ 'is-invalid': errors['register-Authentication'] })}
+                                    innerRef={register({ required: true, validate: value => value !== '' })}
+                                />
                             </FormGroup>
                             <FormGroup>
                                 <Label className='form-label' for='register-password'>

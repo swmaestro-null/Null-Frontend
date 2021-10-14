@@ -17,7 +17,6 @@ export default [
     id: 'pricing',
     title: 'Pricing',
     icon: <Circle size={12} />,
-    permissions: ['admin', 'editor'],
     navLink: '/pages/pricing'
   }
 ]

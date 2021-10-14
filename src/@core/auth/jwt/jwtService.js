@@ -103,10 +103,11 @@ export default class JwtService {
   }
 
   login(...args) {
-    return axios.post(this.jwtConfig.loginEndpoint, {
+    const data = axios.post(this.jwtConfig.loginEndpoint, {
       email: args[0].email,
       password: args[0].password
     })
+    return data
   }
 
   register(...args) {
