@@ -13,6 +13,7 @@ import { AbilityContext } from '@src/utility/context/Can'
 import { Link, useHistory } from 'react-router-dom'
 import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
 import classnames from 'classnames'
+import { Rewind } from 'react-feather'
 
 const ToastContent = ({ name, role }) => (
   <Fragment>
@@ -33,8 +34,8 @@ const Login = () => {
   const ability = useContext(AbilityContext)
   const dispatch = useDispatch()
   const history = useHistory()
-  const [email, setEmail] = useState('admin@demo.com')
-  const [password, setPassword] = useState('admin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const { register, errors, handleSubmit } = useForm()
   const illustration = skin === 'dark' ? 'login-v2-dark.svg' : 'login-v2.svg',
@@ -47,8 +48,12 @@ const Login = () => {
         .then(res => {
           const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken }
           dispatch(handleLogin(data))
-          ability.update(res.data.userData.ability)
-          history.push(getHomeRouteForLoggedInUser(data.role))
+          console.log(res.data)
+          useJwt.setToken(res.data.data.token)
+          console.log(history)
+          //ability.update(res.data.userData.ability)
+          history.push(getHomeRouteForLoggedInUser(res.data.success))
+          console.log(history)
           toast.success(
             <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
             { transition: Slide, hideProgressBar: true, autoClose: 2000 }
@@ -109,7 +114,7 @@ const Login = () => {
               <FormGroup>
                 <CustomInput type='checkbox' className='custom-control-Primary' id='remember-me' label='Remember Me' />
               </FormGroup>
-              <Button.Ripple color='primary' block>
+              <Button.Ripple type='submit' color='primary' block>
                 Sign in
               </Button.Ripple>
             </Form>

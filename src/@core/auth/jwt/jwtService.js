@@ -3,24 +3,30 @@ import jwtDefaultConfig from './jwtDefaultConfig'
 
 export default class JwtService {
   // ** jwtConfig <= Will be used by this service
+  //jwtconfig를 사용
   jwtConfig = { ...jwtDefaultConfig }
 
   // ** For Refreshing Token
+  //refresh token을 이용하기 위해
   isAlreadyFetchingAccessToken = false
 
   // ** For Refreshing Token
+  //refresh token을 이용하기 위해
   subscribers = []
 
   constructor(jwtOverrideConfig) {
     this.jwtConfig = { ...this.jwtConfig, ...jwtOverrideConfig }
 
     // ** Request Interceptor
+    //request 요청을 가로챔
     axios.interceptors.request.use(
       config => {
         // ** Get token from localStorage
+        //로컬에 저장된 접근 토큰을 가져온다
         const accessToken = this.getToken()
 
         // ** If token is present add it to request's Authorization Header
+        //토큰이 존재하면 요청의 인증헤더로 추가
         if (accessToken) {
           // ** eslint-disable-next-line no-param-reassign
           config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
@@ -31,13 +37,16 @@ export default class JwtService {
     )
 
     // ** Add request/response interceptor
+    //request를 추가하거나 response를 가로채는 곳
     axios.interceptors.response.use(
       response => response,
       error => {
         // ** const { config, response: { status } } = error
+        //가져온 응답이 Error면
         const { config, response } = error
         const originalRequest = config
 
+        //상태가 401이면
         // ** if (status === 401) {
         if (response && response.status === 401) {
           if (!this.isAlreadyFetchingAccessToken) {
@@ -46,6 +55,7 @@ export default class JwtService {
               this.isAlreadyFetchingAccessToken = false
 
               // ** Update accessToken in localStorage
+              //accessToken을 localStorage에 업데이트 하는곳
               this.setToken(r.data.accessToken)
               this.setRefreshToken(r.data.refreshToken)
 
@@ -93,11 +103,20 @@ export default class JwtService {
   }
 
   login(...args) {
-    return axios.post(this.jwtConfig.loginEndpoint, ...args)
+    return axios.post(this.jwtConfig.loginEndpoint, {
+      email: args[0].email,
+      password: args[0].password
+    })
   }
 
   register(...args) {
-    return axios.post(this.jwtConfig.registerEndpoint, ...args)
+    console.log(args[0].email, args[0].password, args[0].phoneNumber, args[0].username)
+    return axios.post(this.jwtConfig.registerEndpoint, {
+      email: args[0].email,
+      name: args[0].username,
+      password: args[0].password,
+      phoneNumber: args[0].phoneNumber
+    })
   }
 
   refreshToken() {

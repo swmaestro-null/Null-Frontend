@@ -26,6 +26,7 @@ const Register = () => {
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
     const [valErrors, setValErrors] = useState({})
     const [terms, setTerms] = useState(false)
 
@@ -34,7 +35,7 @@ const Register = () => {
     const onSubmit = () => {
         if (isObjEmpty(errors)) {
             useJwt
-                .register({ username, email, password })
+                .register({ username, email, password, phoneNumber })
                 .then(res => {
                     if (res.data.error) {
                         const arr = {}
@@ -69,6 +70,14 @@ const Register = () => {
         const errs = valErrors
         if (errs.email) delete errs.email
         setEmail(e.target.value)
+        setValErrors(errs)
+    }
+
+    //phoneNumber 상태 바꾸는 것
+    const handlephoneNumberChange = e => {
+        const errs = valErrors
+        if (errs.phoneNumber) delete errs.phoneNumber
+        setPhoneNumber(e.target.value)
         setValErrors(errs)
     }
 
@@ -109,6 +118,25 @@ const Register = () => {
                                     name='register-username'
                                     onChange={handleUsernameChange}
                                     className={classnames({ 'is-invalid': errors['register-username'] })}
+                                    innerRef={register({ required: true, validate: value => value !== '' })}
+                                />
+                                {Object.keys(valErrors).length && valErrors.username ? (
+                                    <small className='text-danger'>{valErrors.username}</small>
+                                ) : null}
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className='form-label' for='register-phoneNumber'>
+                                    PhoneNumber
+                                </Label>
+                                <Input
+                                    autoFocus
+                                    type='text'
+                                    value={phoneNumber}
+                                    placeholder='010-1234-5678'
+                                    id='register-phoneNumber'
+                                    name='register-phoneNumber'
+                                    onChange={handlephoneNumberChange}
+                                    className={classnames({ 'is-invalid': errors['register-phoneNumber'] })}
                                     innerRef={register({ required: true, validate: value => value !== '' })}
                                 />
                                 {Object.keys(valErrors).length && valErrors.username ? (

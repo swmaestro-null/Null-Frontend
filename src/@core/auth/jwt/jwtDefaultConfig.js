@@ -1,7 +1,7 @@
 // ** Auth Endpoints
 export default {
-  loginEndpoint: '/jwt/login',
-  registerEndpoint: '/jwt/register',
+  loginEndpoint: 'http://3.36.243.130:8080/api/v1/user/login',
+  registerEndpoint: 'http://3.36.243.130:8080/api/v1/user/signup',
   refreshEndpoint: '/jwt/refresh-token',
   logoutEndpoint: '/jwt/logout',
 
