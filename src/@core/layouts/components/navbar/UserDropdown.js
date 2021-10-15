@@ -33,16 +33,28 @@ const UserDropdown = () => {
     }
   }, [])
 
+  const LoginButton = () => {
+    // console.log(userData)
+    return <Link to='/Login'><Button.Ripple color='primary'>Login</Button.Ripple></Link>
+  }
+
+  const LogoutButton = () => {
+    console.log(userData.name)
+    return <Link to='/Login'><Button.Ripple color='primary'>Logout</Button.Ripple></Link>
+  }
+
+
   //** Vars
   const userAvatar = (userData && userData.avatar) || defaultAvatar
 
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
+        <span className='user-name font-weight-bold' style={{ margin: 10 }}>{(userData && userData['name'])}님 안녕하세요</span>
         <Link to='/pages/pricing'><Button.Ripple color='primary' style={{ margin: 10 }}>Free</Button.Ripple></Link>
-        <Link to='/Login'><Button.Ripple color='primary'>Login</Button.Ripple></Link>
+        {userData ? <LogoutButton /> : <LoginButton />}
       </DropdownToggle>
-      <DropdownMenu right>
+      {/*<DropdownMenu right>
         <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
           <User size={14} className='mr-75' />
           <span className='align-middle'>Profile</span>
@@ -63,7 +75,7 @@ const UserDropdown = () => {
           <Power size={14} className='mr-75' />
           <span className='align-middle'>Logout</span>
         </DropdownItem>
-      </DropdownMenu>
+      </DropdownMenu>*/}
     </UncontrolledDropdown>
   )
 }

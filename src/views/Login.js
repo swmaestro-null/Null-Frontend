@@ -46,7 +46,7 @@ const Login = () => {
       useJwt
         .login({ email, password })
         .then(res => {
-          const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken }
+          const data = { ...res.data.data, accessToken: res.data.data.token, refreshToken: res.data.refreshToken }
           dispatch(handleLogin(data))
           console.log(res.data)
           useJwt.setToken(res.data.data.token)
@@ -54,7 +54,7 @@ const Login = () => {
           //로그인 성공시 /home으로 이통되도록 하는 history
           history.push('/')
           toast.success(
-            <ToastContent name={data.fullName || data.username || 'John Doe'} role={data.role || 'admin'} />,
+            <ToastContent name={data.name} role={data.role || 'admin'} />,
             { transition: Slide, hideProgressBar: true, autoClose: 2000 }
           )
         })
