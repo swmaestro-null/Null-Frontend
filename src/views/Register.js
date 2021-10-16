@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux'
 import { handleLogin } from '@store/actions/auth'
 import { AbilityContext } from '@src/utility/context/Can'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const ToastContent = () => (
     <Fragment>
@@ -64,7 +65,7 @@ const Register = () => {
                         toast.success(
                             <ToastContent />
                         )
-                        dispatch(handleLogin(data))
+                        // dispatch(handleLogin(data))
                         history.push('/login')
                     }
                 })
@@ -94,6 +95,39 @@ const Register = () => {
         if (errs.phoneNumber) delete errs.phoneNumber
         setPhoneNumber(e.target.value)
         setValErrors(errs)
+    }
+
+    const Toast = e => (
+        <Fragment>
+            <div className='toastify-header'>
+                <h6 className='toast-title font-weight-bold'>이메일로 인증번호가 발송 되었습니다.</h6>
+            </div>
+        </Fragment>
+    )
+    //이메일로 인증 보내기
+    //email이 빈 것인지 아닌지 체크 후 인증을 보낸다.
+    const emailSend = () => {
+        console.log("Test")
+        if (isObjEmpty(errors)) {
+            useJwt.SendEmail({ email })
+                .then(res => {
+                    if (res.data.error) {
+                        const arr = {}
+                        for (const property in res.data.error) {
+                            if (res.data.error[property] !== null) arr[property] = res.data.error[property]
+                        }
+                        setValErrors(arr)
+                    } else {
+                        setValErrors({})
+                        console.log(res)
+                        // setAuthenicationNumber(res)
+                        toast.success(
+                            <Toast />
+                        )
+                    }
+
+                })
+        }
     }
 
     //authentication 상태 바꾸는 것
@@ -183,9 +217,11 @@ const Register = () => {
                                 {Object.keys(valErrors).length && valErrors.email ? (
                                     <small className='text-danger'>{valErrors.email}</small>
                                 ) : null}
-                                <Button.Ripple color='primary' style={{ margin: 10 }}>
+
+                                <Button.Ripple color='primary' style={{ margin: 10 }} onClick={emailSend}>
                                     Authentication
                                 </Button.Ripple>
+
                             </FormGroup>
                             <FormGroup>
                                 <Label className='form-label' for='register-Authentication'>

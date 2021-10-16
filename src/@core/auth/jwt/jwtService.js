@@ -110,6 +110,22 @@ export default class JwtService {
     return data
   }
 
+  SendEmail(args) {
+    console.log(args)
+    return axios.post('http://3.36.243.130:8080/api/v1/user/sendCode', {
+      email: args.email
+    })
+  }
+
+  SendImage(args) {
+    const str = 'Bearer '
+    console.log(args)
+    console.log(`Bearer ${this.getToken()}`)
+    return axios.post('http://3.36.243.130:8080/api/v1/paint/upload', {
+      file: args
+    }, { headers: { Authorization: `Bearer ${this.getToken()}` } })
+  }
+
   register(...args) {
     console.log(args[0].email, args[0].password, args[0].phoneNumber, args[0].username)
     return axios.post(this.jwtConfig.registerEndpoint, {
