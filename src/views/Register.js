@@ -1,4 +1,4 @@
-import { Fragment, useState, useContext } from 'react'
+import { Fragment, useState, useContext, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Logo from '@src/assets/images/logo/logo2.png'
 import { useForm } from 'react-hook-form'
@@ -44,6 +44,26 @@ const Register = () => {
     const [terms, setTerms] = useState(false)
 
     const { register, errors, handleSubmit, trigger } = useForm()
+
+    const [minutes, setMin] = useState(0)
+    const [seconds, setSecond] = useState(0)
+
+    useEffect(() => {
+        const countdown = setInterval(() => {
+            if (parseInt(seconds) > 0) {
+                setSecond(parseInt(seconds) - 1)
+            }
+            if (parseInt(seconds) === 0) {
+                if (parseInt(minutes) === 0) {
+                    clearInterval(countdown)
+                } else {
+                    setMin(parseInt(minutes) - 1)
+                    setSecond(59)
+                }
+            }
+        }, 1000)
+        return () => clearInterval(countdown)
+    }, [minutes, seconds])
 
     const onSubmit = () => {
         if (isObjEmpty(errors)) {
@@ -109,6 +129,8 @@ const Register = () => {
     const emailSend = () => {
         console.log("Test")
         if (isObjEmpty(errors)) {
+            setMin(3)
+            setSecond(0)
             useJwt.SendEmail({ email })
                 .then(res => {
                     if (res.data.error) {
@@ -124,6 +146,26 @@ const Register = () => {
                         toast.success(
                             <Toast />
                         )
+                    }
+
+                })
+        }
+    }
+
+    const sendConfirm = () => {
+        if (isObjEmpty(errors)) {
+            useJwt.SendConfirm({ authenticationNumber, email })
+                .then(res => {
+                    if (res.data.error) {
+                        const arr = {}
+                        for (const property in res.data.error) {
+                            if (res.data.error[property] !== null) arr[property] = res.data.error[property]
+                        }
+                        setValErrors(arr)
+                    } else {
+                        setValErrors({})
+                        console.log(res)
+                        // setAuthenicationNumber(res)
                     }
 
                 })
@@ -235,6 +277,11 @@ const Register = () => {
                                     className={classnames({ 'is-invalid': errors['register-Authentication'] })}
                                     innerRef={register({ required: true, validate: value => value !== '' })}
                                 />
+
+                                <Button.Ripple color='primary' style={{ margin: 10 }}>
+                                    Confirmation
+                                </Button.Ripple>
+                                <Label>{minutes} : {seconds < 10 ? `0${seconds}` : seconds}</Label>
                             </FormGroup>
                             <FormGroup>
                                 <Label className='form-label' for='register-password'>
