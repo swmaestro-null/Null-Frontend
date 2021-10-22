@@ -278,7 +278,7 @@ const Register = () => {
                                     innerRef={register({ required: true, validate: value => value !== '' })}
                                 />
 
-                                <Button.Ripple color='primary' style={{ margin: 10 }}>
+                                <Button.Ripple color='primary' style={{ margin: 10 }} onClick={sendConfirm}>
                                     Confirmation
                                 </Button.Ripple>
                                 <Label>{minutes} : {seconds < 10 ? `0${seconds}` : seconds}</Label>

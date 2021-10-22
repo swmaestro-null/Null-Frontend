@@ -4,6 +4,9 @@ import UserDropdown from './UserDropdown'
 // ** Third Party Components
 import { Sun, Moon, Menu } from 'react-feather'
 import { NavItem, NavLink, Button } from 'reactstrap'
+import themeConfig from '@configs/themeConfig'
+import Logo from '@src/assets/images/logo/logo2.png'
+import { Link } from 'react-router-dom'
 
 const NavbarUser = props => {
   // ** Props
@@ -27,10 +30,17 @@ const NavbarUser = props => {
           </NavLink>
         </NavItem>
       </ul>
-      <div className='bookmark-wrapper d-flex align-items-center'>
+      <div>
         <NavItem className='d-none d-lg-block'>
           <NavLink className='nav-link-style'>
-            <ThemeToggler />
+            <NavLink className='navbar-brand' className='navbar-container d-flex content'>
+              <span className='brand-logo'>
+                <img src={Logo} style={{ height: 45 }} alt='logo' />
+              </span>
+              <Link to='/' className='navbar align-items-center '>Home</Link>
+              <Link to='/second-page' className='navbar align-items-center '>Painting</Link>
+              <Link to='/pages/pricing' className='navbar align-items-center '>Pricing</Link>
+            </NavLink>
           </NavLink>
         </NavItem>
       </div>

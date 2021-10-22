@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 function MainPage1() {
     return (
         <div className="body1">
@@ -10,6 +10,6 @@ function MainPage1() {
             </div>
 
         </div>
-    );
+    )
 }
-export default MainPage1;
+export default MainPage1

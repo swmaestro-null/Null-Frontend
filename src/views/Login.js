@@ -48,8 +48,9 @@ const Login = () => {
         .then(res => {
           const data = { ...res.data.data, accessToken: res.data.data.token, refreshToken: res.data.refreshToken }
           dispatch(handleLogin(data))
-          console.log(res.data)
-          useJwt.setToken(res.data.data.token)
+          //console.log(res.data)
+          //useJwt.setToken(res.data.data.token)
+          localStorage.accessToken = res.data.data.token
           // ability.update(res.data.userData.ability)
           //로그인 성공시 /home으로 이통되도록 하는 history
           history.push('/')
@@ -71,9 +72,8 @@ const Login = () => {
               <img src={Logo} width="80%" height="auto"></img>
             </Link>
             <CardTitle tag='h4' className='mb-1'>
-              Welcome to ColorAid! 👋
+              Login
             </CardTitle>
-            <CardText className='mb-2'>Please sign-in to your account and start the adventure</CardText>
             <Form className='auth-login-form mt-2' onSubmit={handleSubmit(onSubmit)}>
               <FormGroup>
                 <Label className='form-label' for='login-email'>
@@ -85,7 +85,7 @@ const Login = () => {
                   value={email}
                   id='login-email'
                   name='login-email'
-                  placeholder='john@example.com'
+                  placeholder='abc@example.com'
                   onChange={e => setEmail(e.target.value)}
                   className={classnames({ 'is-invalid': errors['login-email'] })}
                   innerRef={register({ required: true, validate: value => value !== '' })}

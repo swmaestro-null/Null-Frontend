@@ -16,15 +16,12 @@ const ForgotPassword = () => {
                         <CardTitle tag='h4' className='mb-1'>
                             Forgot Password? 🔒
                         </CardTitle>
-                        <CardText className='mb-2'>
-                            Enter your email and we'll send you instructions to reset your password
-                        </CardText>
                         <Form className='auth-forgot-password-form mt-2' onSubmit={e => e.preventDefault()}>
                             <FormGroup>
                                 <Label className='form-label' for='login-email'>
                                     Email
                                 </Label>
-                                <Input type='email' id='login-email' placeholder='john@example.com' autoFocus />
+                                <Input type='email' id='login-email' placeholder='abc@example.com' autoFocus />
                             </FormGroup>
                             <Button.Ripple color='primary' block>
                                 Send reset link

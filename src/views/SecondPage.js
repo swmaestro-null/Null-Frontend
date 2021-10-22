@@ -58,11 +58,29 @@ const SecondPage = () => {
   const [image, setImage] = useState('')
   const [sketch, setSketch] = useState('')
 
+  const dataURLtoFile = (dataurl, filename) => {
+    const arr = dataurl.split(',')
+    const mime = arr[0].match(/:(.*?);/)[1]
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+    while (n) {
+      u8arr[n - 1] = bstr.charCodeAt(n - 1)
+      n -= 1
+    }
+    //debugger
+    return new File([u8arr], filename, { type: mime })
+  }
 
   const sendImage = () => {
-    console.log("Test")
+    console.log(image)
+    const file = dataURLtoFile(image, "test.png")
+    const data = new FormData()
+    console.log(file)
+    data.append('image', file, file.name)
     if (isObjEmpty(errors)) {
-      useJwt.SendImage(image)
+      console.log(localStorage.localStorage)
+      useJwt.SendImage(data)
         .then(res => {
           if (res.data.error) {
             const arr = {}
@@ -71,7 +89,7 @@ const SecondPage = () => {
             }
             setValErrors(arr)
           } else {
-            setValErrors({})
+            //setValErrors({})
             console.log(res)
             // setAuthenicationNumber(res)
             // toast.success(
@@ -84,8 +102,12 @@ const SecondPage = () => {
   }
 
   const sendSketch = () => {
+    const file = dataURLtoFile(sketch, "test.png")
+    const data = new FormData()
+    console.log(file)
+    data.append('image', file, file.name)
     if (isObjEmpty(errors)) {
-      useJwt.SendImage(sketch)
+      useJwt.SendImage(data)
         .then(res => {
           if (res.data.error) {
             const arr = {}
@@ -94,7 +116,7 @@ const SecondPage = () => {
             }
             setValErrors(arr)
           } else {
-            setValErrors({})
+            //setValErrors({})
             console.log(res)
             // setAuthenicationNumber(res)
             // toast.success(
@@ -144,27 +166,31 @@ const SecondPage = () => {
     // </>
 
     <div>
-      <input type='file'
-        accept='image/*'
-        name='profile_img'
-        onChange={handleFileOnChange}>
-      </input>
-      {profile_preview}
+      <button className>test</button>
+      <div>
+        <input type='file'
+          accept='image/*'
+          name='profile_img'
+          onChange={handleFileOnChange}>
+        </input>
+        {profile_preview}
 
-      <Button.Ripple color='primary' style={{ margin: 10 }} onClick={sendImage}>
-        Send
-      </Button.Ripple>
+        <Button.Ripple color='primary' style={{ margin: 10 }} onClick={sendImage}>
+          Send
+        </Button.Ripple>
+      </div>
+      <div>
+        <input type='file'
+          accept='image/*'
+          name='profile_img'
+          onChange={handleFileOnChange2}>
+        </input>
+        {sketchImage}
 
-      <input type='file'
-        accept='image/*'
-        name='profile_img'
-        onChange={handleFileOnChange2}>
-      </input>
-      {sketchImage}
-
-      <Button.Ripple color='primary' style={{ margin: 10 }} onClick={sendSketch}>
-        Draw
-      </Button.Ripple>
+        <Button.Ripple color='primary' style={{ margin: 10 }} onClick={sendSketch}>
+          Draw
+        </Button.Ripple>
+      </div>
 
     </div>
   )

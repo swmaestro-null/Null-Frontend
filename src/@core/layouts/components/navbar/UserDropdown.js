@@ -34,7 +34,6 @@ const UserDropdown = () => {
   }, [])
 
   const LoginButton = () => {
-    // console.log(userData)
     return <Link to='/Login'><Button.Ripple color='primary'>Login</Button.Ripple></Link>
   }
 
@@ -50,7 +49,7 @@ const UserDropdown = () => {
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
-        <span className='user-name font-weight-bold' style={{ margin: 10 }}>{(userData && userData['name'])}님 안녕하세요</span>
+        <span className='user-name font-weight-bold' style={{ margin: 10 }}>{(userData && userData['name'])}, Hello</span>
         <Link to='/pages/pricing'><Button.Ripple color='primary' style={{ margin: 10 }}>Free</Button.Ripple></Link>
         {userData ? <LogoutButton /> : <LoginButton />}
       </DropdownToggle>

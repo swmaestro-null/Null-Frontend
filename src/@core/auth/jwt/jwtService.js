@@ -1,6 +1,5 @@
 import axios from 'axios'
 import jwtDefaultConfig from './jwtDefaultConfig'
-
 export default class JwtService {
   // ** jwtConfig <= Will be used by this service
   //jwtconfig를 사용
@@ -29,7 +28,7 @@ export default class JwtService {
         //토큰이 존재하면 요청의 인증헤더로 추가
         if (accessToken) {
           // ** eslint-disable-next-line no-param-reassign
-          config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
+          //config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
         }
         return config
       },
@@ -112,25 +111,27 @@ export default class JwtService {
 
   SendEmail(args) {
     console.log(args)
-    return axios.post('http://3.36.243.130:8080/api/v1/user/sendCode', {
+    return axios.post('/api/v1/user/sendCode', {
       email: args.email
     })
   }
 
-  SendImage(args) {
-    const str = 'Bearer '
-    console.log(args)
-    console.log(`Bearer ${this.getToken()}`)
-    return axios.post('http://3.36.243.130:8080/api/v1/paint/upload', {
-      file: args
-    }, { headers: { Authorization: `Bearer ${this.getToken()}` } })
+  SendImage(data) {
+    console.log(`Bearer ${localStorage.accessToken}`)
+    return axios.post('/api/v1/paint/upload', data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.accessToken}`
+        }
+      })
   }
 
   SendConfirm(args) {
-    return axios.post('http://3.36.243.130:8080/api/v1/user/checkCode', {
+    return axios.post('/api/v1/user/checkCode', {
       code: args.authenticationNumber,
       email: args.email
-    }, { headers: { Authorization: `Bearer ${this.getToken()}` } })
+    })
   }
 
   register(...args) {
