@@ -1,0 +1,94 @@
+.back{
+    background-color: white;
+}
+
+.carousel{
+    height:500;
+    min-height: 200;
+}
+
+
+/*두번째 메인 페이지*/
+.numberingButton{
+    margin: 1em;
+    background-color: #6977F6;
+    border-radius: 50%;
+    color: white;
+    border:#6977F6;
+}
+
+.numbering{
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    color: black;
+}
+
+.SecondMainWord{
+    margin:1em;
+    text-align: center;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+    
+}
+.SecondMainWord2{
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 29px;
+    text-align: center;
+    color: black;
+}
+
+.container{
+    margin: 0 auto;
+}
+
+.features_P2SU{
+    padding: 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: stretch;
+    justify-content: space-evenly;
+}
+
+.SecondMainImage1{
+    text-align: center;
+    top : 1000px;
+}
+
+/*footer*/
+.footerWord{
+    margin:1em;
+}
+.footerSet{
+    justify-content: space-evenly;
+    text-align: center;
+    background-color: white;
+}
+.firstWord{
+    margin:1em;
+    font-family: Noto Sans KR;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+}
+.secondWord{
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    font-style: normal;
+    color: black;
+    margin:1em;
+}
+.image{
+    margin:1em;
+    min-height: auto;
+    max-height: 45;
+}

@@ -58,7 +58,6 @@ const LayoutWrapper = props => {
   return (
     <div>
       <div className='content-overlay'></div>
-      <div className='header-navbar-shadow' />
       <div
         className={classnames({
           'content-wrapper': !appLayout,

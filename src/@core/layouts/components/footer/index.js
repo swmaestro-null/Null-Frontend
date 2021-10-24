@@ -1,11 +1,12 @@
 // ** Icons Import
-import { Heart } from 'react-feather'
-
+import '@src/views/App.css'
+import { Facebook, Twitter, Mail, GitHub, HelpCircle, Coffee } from 'react-feather'
+import { Button } from 'reactstrap'
 const Footer = () => {
   return (
-    <p className='clearfix mb-0'>
+    <div className='clearfix mb-0'>
 
-    </p>
+    </div>
   )
 }
 
