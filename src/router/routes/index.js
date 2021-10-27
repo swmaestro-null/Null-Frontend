@@ -52,6 +52,14 @@ const Routes = [
   {
     path: '/swiper',
     component: lazy(() => import('../../views/swiper'))
+  },
+  {
+    path: '/account-settings',
+    component: lazy(() => import('../../views/account-settings'))
+  },
+  {
+    path: '/Edit',
+    component: lazy(() => import('../../views/Edit'))
   }
 
 ]

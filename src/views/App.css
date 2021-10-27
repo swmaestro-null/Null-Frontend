@@ -7,6 +7,18 @@
     min-height: 200;
 }
 
+.Word{
+    font-family: Noto Sans KR;
+    vertical-align: center;
+    text-align: center;
+}
+
+.NavWord{
+    font-family: Noto Sans KR;
+    vertical-align: center;
+    text-align: center;
+    font-size: 18px;
+}
 
 /*두번째 메인 페이지*/
 .numberingButton{
@@ -91,4 +103,11 @@
     margin:1em;
     min-height: auto;
     max-height: 45;
+}
+
+/*Edit 페이지*/
+.SettingFrame{
+    justify-content: center;
+    display: flex;
+    margin: 100px;
 }

@@ -14,16 +14,17 @@ import { Link, useHistory } from 'react-router-dom'
 import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
 import classnames from 'classnames'
 import { Rewind } from 'react-feather'
+import './App.css'
 
 const ToastContent = ({ name, role }) => (
   <Fragment>
     <div className='toastify-header'>
       <div className='title-wrapper'>
-        <h6 className='toast-title font-weight-bold'>안녕하세요, {name}님!</h6>
+        <h6 className='toast-title font-weight-bold Word'>안녕하세요, {name}님!</h6>
       </div>
     </div>
     <div className='toastify-body'>
-      <span>오늘은 어떤 스케치를 칠해드릴까요?</span>
+      <span className="Word">오늘은 어떤 스케치를 칠해드릴까요?</span>
     </div>
   </Fragment>
 )
@@ -48,9 +49,12 @@ const Login = () => {
         .then(res => {
           const data = { ...res.data.data, accessToken: res.data.data.token, refreshToken: res.data.refreshToken }
           dispatch(handleLogin(data))
-          //console.log(res.data)
+          console.log(res.data)
           //useJwt.setToken(res.data.data.token)
           localStorage.accessToken = res.data.data.token
+          //localStorage.userData = res.data.data
+          console.log(localStorage.userData['email'])
+          console.log(localStorage)
           // ability.update(res.data.userData.ability)
           //로그인 성공시 /home으로 이통되도록 하는 history
           history.push('/')
@@ -97,7 +101,7 @@ const Login = () => {
                     Password
                   </Label>
                   <Link to='/ForgotPassword'>
-                    <small>Forgot Password?</small>
+                    <small href='/ForgotPassword'>Forgot Password?</small>
                   </Link>
                 </div>
                 <InputPasswordToggle

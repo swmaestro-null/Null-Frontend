@@ -34,48 +34,24 @@ const UserDropdown = () => {
   }, [])
 
   const LoginButton = () => {
-    return <Link to='/Login'><Button.Ripple color='primary'>Login</Button.Ripple></Link>
+    return <Link to='/Login'><Button.Ripple className="Word" color='primary'>로그인</Button.Ripple></Link>
   }
 
   const LogoutButton = () => {
     console.log(userData.name)
-    return <Link to='/Login'><Button.Ripple color='primary'>Logout</Button.Ripple></Link>
+    return <Link to='/Login'><Button.Ripple className="Word" color='primary'>로그아웃</Button.Ripple></Link>
   }
-
-
-  //** Vars
-  const userAvatar = (userData && userData.avatar) || defaultAvatar
 
   return (
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
-        <span className='user-name font-weight-bold' style={{ margin: 10 }}>{(userData && userData['name'])}, Hello</span>
-        <Link to='/pages/pricing'><Button.Ripple color='primary' style={{ margin: 10 }}>Free</Button.Ripple></Link>
+        <div>
+          <Link to='/account-settings'><span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}님, 안녕하세요</span></Link>
+          <Link to='/pages/pricing'><Button.Ripple className="Word" color='primary' style={{ margin: 10 }}>무료 체험</Button.Ripple></Link>
+        </div>
         {userData ? <LogoutButton /> : <LoginButton />}
       </DropdownToggle>
-      {/*<DropdownMenu right>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <User size={14} className='mr-75' />
-          <span className='align-middle'>Profile</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <Mail size={14} className='mr-75' />
-          <span className='align-middle'>Inbox</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <CheckSquare size={14} className='mr-75' />
-          <span className='align-middle'>Tasks</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='#' onClick={e => e.preventDefault()}>
-          <MessageSquare size={14} className='mr-75' />
-          <span className='align-middle'>Chats</span>
-        </DropdownItem>
-        <DropdownItem tag={Link} to='/login' onClick={() => dispatch(handleLogout())}>
-          <Power size={14} className='mr-75' />
-          <span className='align-middle'>Logout</span>
-        </DropdownItem>
-      </DropdownMenu>*/}
-    </UncontrolledDropdown>
+    </UncontrolledDropdown >
   )
 }
 

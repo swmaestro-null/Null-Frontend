@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className="back">
       <Card title='Uncontrolled Example' code={carouselUncontrolled}>
-        <div className="carousel">
+        <div>
           <CarouselUncontrolled />
         </div>
       </Card>

@@ -118,11 +118,12 @@ export default class JwtService {
 
   SendImage(data) {
     console.log(`Bearer ${localStorage.accessToken}`)
+    console.log(data)
     return axios.post('/api/v1/paint/upload', data,
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTYzNTE0MjYzM30.ERtHDd1ChdAozdtQ2z6Amk7Y4fRsbZWZVsS5ZbWSV0GC_K4havik37oJHWHs-vvBEYO-eLRXDrsO8Ssa1MvOIw`
+          Authorization: `Bearer ${localStorage.accessToken}`
         }
       })
   }

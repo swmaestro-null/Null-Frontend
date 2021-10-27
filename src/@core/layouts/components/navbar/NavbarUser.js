@@ -35,11 +35,12 @@ const NavbarUser = props => {
           <NavLink className='nav-link-style'>
             <NavLink className='navbar-brand' className='navbar-container d-flex content'>
               <span className='brand-logo'>
-                <img src={Logo} style={{ height: 45 }} alt='logo' />
+                <img src={Logo} style={{ height: 50 }} alt='logo' />
               </span>
-              <Link to='/' className='navbar align-items-center '>Home</Link>
-              <Link to='/second-page' className='navbar align-items-center '>Painting</Link>
-              <Link to='/pages/pricing' className='navbar align-items-center '>Pricing</Link>
+              <Link to='/' className='navbar align-items-center NavWord'>홈</Link>
+              <Link to='/second-page' className='navbar align-items-center NavWord'>채색 하기</Link>
+              <Link to='/Edit' className='navbar align-items-center NavWord'>편집하기</Link>
+              <Link to='/pages/pricing' className='navbar align-items-center NavWord'>가격</Link>
             </NavLink>
           </NavLink>
         </NavItem>
