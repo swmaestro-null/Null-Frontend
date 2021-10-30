@@ -111,3 +111,28 @@
     display: flex;
     margin: 100px;
 }
+
+/*사용자 설정 페이지*/
+.AccountSetting{
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    font-weight: bold;
+    color:black;
+}
+
+/*채색 페이지*/
+.ColorPageWord{
+    font-family: Noto Sans KR;
+    font-size: 20px;
+    color:black;
+}
+.input-file-button{
+
+}
+.outFrame{
+    margin: 2em;
+}
+.innerFrame{
+    text-align: center;
+    vertical-align: center;
+}

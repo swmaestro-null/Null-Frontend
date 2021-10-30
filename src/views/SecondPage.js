@@ -2,61 +2,18 @@ import React, { useState } from 'react'
 
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
-import { Button } from 'reactstrap'
+import { Row, Col, Button, Label } from 'reactstrap'
 import { isObjEmpty } from '@utils'
 import { useForm } from 'react-hook-form'
 import useJwt from '@src/auth/jwt/useJwt'
-
-
-const myTheme = {
-  // Theme object to extends default dark theme.
-
-}
-// const SecondPage = () => (
-
-//   <ImageEditor
-//     includeUI={{
-//       loadImage: {
-//         path: 'img/sampleImage.jpg',
-//         name: 'SampleImage'
-//       },
-//       theme: myTheme,
-//       menu: ['shape', 'filter', 'draw'],
-//       initMenu: 'draw',
-//       uiSize: {
-//         width: '80%',
-//         height: '700px'
-//       },
-//       menuBarPosition: 'bottom'
-//     }}
-
-//     cssMaxHeight={500}
-//     cssMaxWidth={700}
-//     selectionStyle={{
-//       cornerSize: 20,
-//       rotatingPointOffset: 20
-//     }}
-//     usageStatistics={true}
-//   />
-// )
-
-
-const imageEditorOptions = {
-  // sort of option properties.
-
-}
+import Big from '@src/assets/images/ColorAid/큰 배경.png'
+import Small from '@src/assets/images/ColorAid/작은 배경.png'
 
 const SecondPage = () => {
-  // const editorRef = React.createRef()
-
-  // const handleClickButton = () => {
-  //   const editorInstance = editorRef.current.getInstance()
-
-  //   editorInstance.flipX()
-  // }
   const { register, errors, handleSubmit, trigger } = useForm()
-  const [image, setImage] = useState('')
-  const [sketch, setSketch] = useState('')
+  const [image, setImage] = useState(Small)
+  const [sketch, setSketch] = useState(Small)
+  const [resultImage, setResult] = useState(Big)
 
   const dataURLtoFile = (dataurl, filename) => {
     const arr = dataurl.split(',')
@@ -152,21 +109,52 @@ const SecondPage = () => {
 
   let profile_preview = null
   if (image !== '') {
-    profile_preview = <img className='profile_preview' style={{ width: 200, height: 200 }} src={image}></img>
+    profile_preview = <img src={image}></img>
   }
 
   let sketchImage = null
   if (sketch !== '') {
-    sketchImage = <img style={{ width: 400, height: 400 }} src={sketch}></img>
+    sketchImage = <img src={sketch}></img>
+  }
+
+  let result = null
+  if (sketch !== '') {
+    result = <img src={resultImage}></img>
   }
   return (
-    // <>
-    //   <ImageEditor ref={editorRef} {...imageEditorOptions} />
-    //   <button onClick={handleClickButton}>Flip image by X Axis!</button>
-    // </>
 
-    <div>
-      <button className>test</button>
+    <div className='outFrame'>
+      <Row >
+        <Col lg={{ size: 4, order: 1 }} sm={{ size: 12 }} xs={{ order: 2 }}>
+          <div className="innerFrame">
+            <div className='d-flex justify-content-around'>
+              <p className="ColorPageWord"> 채색 스타일 이미지</p>
+              <Label>파일 업로드</Label>
+            </div>
+            <img src={image} className="img-fluid rounded mb-75"></img>
+          </div>
+
+          <div className="innerFrame">
+            <div className='d-flex justify-content-around'>
+              <p className="ColorPageWord"> 채색할 이미지</p>
+              <Label>파일 업로드</Label>
+            </div>
+            <img src={sketch} className="img-fluid rounded mb-75"></img>
+          </div>
+        </Col>
+        <Col lg={{ size: 8, order: 1 }} sm={{ size: 12 }} xs={{ order: 1 }}>
+          <div className="innerFrame">
+            <div className='d-flex justify-content-around'>
+              <p className="ColorPageWord"> 채색 스타일 이미지</p>
+              <Label>파일 업로드</Label>
+            </div>
+            <img src={resultImage} className="img-fluid rounded mb-75"></img>
+          </div>
+        </Col>
+
+      </Row>
+
+
       <div>
         <input type='file'
           accept='image/*'

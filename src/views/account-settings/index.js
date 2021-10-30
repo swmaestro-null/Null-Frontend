@@ -20,15 +20,11 @@ const AccountSettings = () => {
         // axios.get('/account-setting/data').then(response => setData(response.data))
         if (isUserLoggedIn() !== null) {
             setData(JSON.parse(localStorage.getItem('userData')))
-            console.log(data)
         }
     }, [])
 
     return (
         <Fragment>
-            <div>
-                <h2>Account Settings </h2>
-            </div>
             <div className="SettingFrame">
 
                 {data !== null ? (

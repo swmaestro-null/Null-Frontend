@@ -109,6 +109,21 @@ export default class JwtService {
     return data
   }
 
+  EditAccount(args) {
+    console.log(args)
+    const data = axios.post('/api/v1/user/update', {
+      email: args.email,
+      name: args.username,
+      password: args.password,
+      phoneNumber: args.phoneNumber
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.accessToken}`
+      }
+    })
+    return data
+  }
+
   SendEmail(args) {
     console.log(args)
     return axios.post('/api/v1/user/sendCode', {

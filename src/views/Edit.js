@@ -19,7 +19,7 @@ const Edit = () => (
             },
             theme: myTheme,
             menu: ['shape', 'filter', 'draw', 'crop', 'flip', 'icon', 'rotate', 'mask'],
-            initMenu: 'filter',
+            initMenu: 'draw',
             uiSize: {
                 minheight: '400px',
                 width: '100%',
