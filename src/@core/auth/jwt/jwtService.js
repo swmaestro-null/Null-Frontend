@@ -131,16 +131,27 @@ export default class JwtService {
     })
   }
 
-  SendImage(data) {
-    console.log(`Bearer ${localStorage.accessToken}`)
-    console.log(data)
-    return axios.post('/api/v1/paint/upload', data,
+  SendImage(email, data, imagetype) {
+    return axios.post(`/api/v1/paint/upload/${imagetype}/${email}`, data,
       {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${localStorage.accessToken}`
         }
       })
+  }
+
+  Colorization(mail) {
+    console.log(mail)
+    return axios.post('/api/v1/paint/reference', {
+      email: mail,
+      referenceFileName: "reference.png",
+      sketchFileName: "sketch.png"
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.accessToken}`
+      }
+    })
   }
 
   SendConfirm(args) {

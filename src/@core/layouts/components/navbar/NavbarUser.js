@@ -38,7 +38,7 @@ const NavbarUser = props => {
                 <img src={Logo} style={{ height: 50 }} alt='logo' />
               </span>
               <Link to='/' className='navbar align-items-center NavWord'>홈</Link>
-              <Link to='/second-page' className='navbar align-items-center NavWord'>채색 하기</Link>
+              <Link to='/second-page' className='navbar align-items-center NavWord'>채색하기</Link>
               <Link to='/Edit' className='navbar align-items-center NavWord'>편집하기</Link>
               <Link to='/pages/pricing' className='navbar align-items-center NavWord'>가격</Link>
             </NavLink>

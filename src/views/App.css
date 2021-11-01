@@ -122,12 +122,19 @@
 
 /*채색 페이지*/
 .ColorPageWord{
+    margin: 7px;
     font-family: Noto Sans KR;
     font-size: 20px;
     color:black;
 }
 .input-file-button{
-
+    padding: 6px 15px;
+    font-family: Noto Sans KR;
+    color: white;
+    background-color: #6977F6;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius:  4px;
 }
 .outFrame{
     margin: 2em;

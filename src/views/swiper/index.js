@@ -10,7 +10,7 @@ import SwiperCore, {
   Lazy,
   Virtual
 } from 'swiper'
-import SwiperAutoplay from './SwiperAutoplay'
+import SwiperResponsive from './SwiperResponsive'
 
 import '@styles/react/libs/swiper/swiper.scss'
 
@@ -28,7 +28,7 @@ const Slider = () => {
       />
       <Row>
         <Col sm='12'>
-          <SwiperAutoplay isRtl={isRtl} />
+          <SwiperResponsive isRtl={isRtl} />
         </Col>
       </Row>
     </Fragment>
