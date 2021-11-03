@@ -50,10 +50,6 @@ const Routes = [
     component: lazy(() => import('../../views/pages/pricing'))
   },
   {
-    path: '/swiper',
-    component: lazy(() => import('../../views/swiper'))
-  },
-  {
     path: '/account-settings',
     component: lazy(() => import('../../views/account-settings'))
   },

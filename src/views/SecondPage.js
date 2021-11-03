@@ -8,8 +8,6 @@ import { useForm } from 'react-hook-form'
 import useJwt from '@src/auth/jwt/useJwt'
 import Big from '@src/assets/images/ColorAid/큰 배경.png'
 import Small from '@src/assets/images/ColorAid/작은 배경.png'
-
-import SwiperResponsive from './swiper/SwiperResponsive'
 import { useRTL } from '@hooks/useRTL'
 import '@styles/react/libs/swiper/swiper.scss'
 import SwiperCore, {
@@ -23,15 +21,27 @@ import SwiperCore, {
   Virtual
 } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import img1 from '@src/assets/images/banner/banner-30.jpg'
-import img2 from '@src/assets/images/banner/banner-31.jpg'
-import img3 from '@src/assets/images/banner/banner-32.jpg'
-import img4 from '@src/assets/images/banner/banner-33.jpg'
-import img5 from '@src/assets/images/banner/banner-34.jpg'
-import img6 from '@src/assets/images/banner/banner-35.jpg'
-import img7 from '@src/assets/images/banner/banner-36.jpg'
+
+import imageToBase64 from 'image-to-base64/browser'
+//스케치 이미지
+import img1 from '@src/assets/images/ColorAid/01_sketch.png'
+import img2 from '@src/assets/images/ColorAid/02_sketch.png'
+import img3 from '@src/assets/images/ColorAid/03_sketch.png'
+import img4 from '@src/assets/images/ColorAid/04_sketch.png'
+import img5 from '@src/assets/images/ColorAid/05_sketch.png'
+import img6 from '@src/assets/images/ColorAid/06_sketch.png'
+import img7 from '@src/assets/images/ColorAid/07_sketch.png'
 import img8 from '@src/assets/images/banner/banner-37.jpg'
 import img9 from '@src/assets/images/banner/banner-38.jpg'
+
+import result1 from '@src/assets/images/ColorAid/01_color.png'
+import result2 from '@src/assets/images/ColorAid/02_color.png'
+import result3 from '@src/assets/images/ColorAid/03_color.png'
+import result4 from '@src/assets/images/ColorAid/04_color.png'
+import result5 from '@src/assets/images/ColorAid/05_color.png'
+import result6 from '@src/assets/images/ColorAid/06_color.png'
+import result7 from '@src/assets/images/ColorAid/07_color.png'
+
 SwiperCore.use([Navigation, Pagination, EffectFade, EffectCube, EffectCoverflow, Autoplay, Lazy, Virtual])
 
 const SecondPage = () => {
@@ -41,9 +51,17 @@ const SecondPage = () => {
   const [resultImage, setResult] = useState(Big)
 
   const Example = new Map()
-  Example.set(img1, img2)
+  Example.set(img1, result1)
+  Example.set(img2, result2)
+  Example.set(img3, result3)
+  Example.set(img4, result4)
+  Example.set(img5, result5)
+  Example.set(img6, result6)
+  Example.set(img7, result7)
 
   const [isRtl, setIsRtl] = useRTL()
+
+  //base64를 formdata형식으로
   const dataURLtoFile = (dataurl, filename) => {
     const arr = dataurl.split(',')
     const mime = arr[0].match(/:(.*?);/)[1]
@@ -68,9 +86,13 @@ const SecondPage = () => {
   }, [])
 
   const sendImage = () => {
+    //참고 이미지
+
+    //formdata인지 아닌지 체크해야함
     const file = dataURLtoFile(image, "reference.png")
     const data = new FormData()
-    data.append('image', file, file.name)
+    data.append('image', file, "reference.png")
+
     if (isObjEmpty(errors)) {
       console.log(localStorage.localStorage)
       useJwt.SendImage(userData.email, data, "reference")
@@ -92,9 +114,11 @@ const SecondPage = () => {
 
         })
     }
+    //스케치
     const file2 = dataURLtoFile(sketch, "sketch.png")
     const data2 = new FormData()
-    data2.append('image', file2, file2.name)
+    data2.append('image', file2, "sketch.png")
+
     if (isObjEmpty(errors)) {
       useJwt.SendImage(userData.email, data2, "sketch")
         .then(res => {
@@ -115,6 +139,7 @@ const SecondPage = () => {
 
         })
     }
+
     if (isObjEmpty(errors)) {
       useJwt.Colorization(userData.email)
         .then(res => {
@@ -124,6 +149,7 @@ const SecondPage = () => {
     }
   }
 
+  //이미지 바꾸는 것
   const handleFileOnChange = (event) => {
     event.preventDefault()
     const reader = new FileReader()
@@ -131,26 +157,56 @@ const SecondPage = () => {
     reader.onloadend = () => {
       setImage(reader.result)
     }
-    setImage(file)
-    reader.readAsDataURL(file)
+    if (event.target.files[0]) {
+      reader.onloadend = () => {
+        setImage(reader.result)
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
+  //스케치 바꾸는 것
   const handleFileOnChange2 = (event) => {
     event.preventDefault()
     const reader = new FileReader()
     const file = event.target.files[0]
-    reader.onloadend = () => {
-      setSketch(reader.result)
+    if (event.target.files[0]) {
+      reader.onloadend = () => {
+        setSketch(reader.result)
+      }
+      reader.readAsDataURL(file)
     }
-    setSketch(file)
-    reader.readAsDataURL(file)
+
   }
 
+
+  //예제 이미지로 바꿔주기
   const ChangeImageFile = (event) => {
     event.preventDefault()
-    console.log(event.target.getAttribute('src'))
-    setSketch(event.target.getAttribute('src'))
-    setImage(Example.get(event.target.getAttribute('src')))
+    imageToBase64(event.target.getAttribute('src')) // Path to the image
+      .then(
+        (response) => {
+          setSketch(`data:image/png;base64, ${response}`)
+        }
+      )
+      .catch(
+        (error) => {
+          console.log(error) // Logs an error if there was one
+        }
+      )
+
+    imageToBase64(Example.get(event.target.getAttribute('src'))) // Path to the image
+      .then(
+        (response) => {
+          setImage(`data:image/png;base64, ${response}`)
+        }
+      )
+      .catch(
+        (error) => {
+          console.log(error) // Logs an error if there was one
+        }
+      )
+
   }
 
   //swiper 옵션
@@ -211,7 +267,10 @@ const SecondPage = () => {
                   name='profile_img'
                   onChange={handleFileOnChange} />
               </div>
-              <img src={image} className="img-fluid rounded mb-75"></img>
+              <div className="ImageWrap">
+                <img src={image} className="img-fluid rounded mb-75"></img>
+                {/* <p className="innerWord">채색된 캐릭터 이미지를 등록해 주세요</p> */}
+              </div>
             </div>
 
             <div className="innerFrame">
@@ -225,7 +284,10 @@ const SecondPage = () => {
                   name='profile_img'
                   onChange={handleFileOnChange2} />
               </div>
-              <img src={sketch} className="img-fluid rounded mb-75"></img>
+              <div className="ImageWrap">
+                <img src={sketch} className="img-fluid rounded mb-75"></img>
+                {/* <p className="innerWord">채색할 스케치 이미지를 등록해 주세요</p> */}
+              </div>
             </div>
           </Col>
           <Col lg={{ size: 8, order: 1 }} sm={{ size: 12 }} xs={{ order: 1 }}>
@@ -234,11 +296,12 @@ const SecondPage = () => {
                 <Label className="input-file-button" onClick={sendImage}>
                   결과확인
                 </Label>
-                <Label className="input-file-button">
-                  저장하기
-                </Label>
+                <a className="input-file-button SaveButton" href={resultImage} download>저장하기</a>
               </div>
-              <img src={resultImage} className="img-fluid rounded mb-75"></img>
+              <div className="ImageWrap">
+                <img src={resultImage} className="img-fluid rounded mb-75"></img>
+                {/* <p className="innerWord">결과 확인 버튼을 눌러 채색된 이미지를 확인 해보세요.</p> */}
+              </div>
             </div>
           </Col>
         </Row>
@@ -255,22 +318,22 @@ const SecondPage = () => {
                   <img src={img1} alt='swiper 1' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={img2} alt='swiper 2' className='img-fluid' />
+                  <img src={img2} alt='swiper 2' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={img3} alt='swiper 3' className='img-fluid' />
+                  <img src={img3} alt='swiper 3' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>dlfj
+                <SwiperSlide>
+                  <img src={img4} alt='swiper 4' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={img4} alt='swiper 4' className='img-fluid' />
+                  <img src={img5} alt='swiper 5' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={img5} alt='swiper 5' className='img-fluid' />
+                  <img src={img6} alt='swiper 6' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
-                  <img src={img6} alt='swiper 6' className='img-fluid' />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src={img7} alt='swiper 7' className='img-fluid' />
+                  <img src={img7} alt='swiper 7' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src={img8} alt='swiper 8' className='img-fluid' />

@@ -1,6 +1,6 @@
 // ** React Imports
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 // ** Custom Components
 import Avatar from '@components/avatar'
@@ -22,6 +22,7 @@ import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 const UserDropdown = () => {
   // ** Store Vars
   const dispatch = useDispatch()
+  const history = useHistory()
 
   // ** State
   const [userData, setUserData] = useState(null)
@@ -33,13 +34,20 @@ const UserDropdown = () => {
     }
   }, [])
 
+  const getOutToken = (e) => {
+    e.preventDefault()
+    localStorage.accessToken = ''
+    history.push('/login')
+    console.log(userData)
+
+  }
+
   const LoginButton = () => {
     return <Link to='/Login'><Button.Ripple className="Word" color='primary'>로그인</Button.Ripple></Link>
   }
 
   const LogoutButton = () => {
-    console.log(userData.name)
-    return <Link to='/Login'><Button.Ripple className="Word" color='primary'>로그아웃</Button.Ripple></Link>
+    return <Link to='/Login'><Button.Ripple className="Word" color='primary' onClick={getOutToken}>로그아웃</Button.Ripple></Link>
   }
 
   return (
@@ -49,7 +57,7 @@ const UserDropdown = () => {
           <Link to='/account-settings'><span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}님, 안녕하세요</span></Link>
           <Link to='/pages/pricing'><Button.Ripple className="Word" color='primary' style={{ margin: 10 }}>무료 체험</Button.Ripple></Link>
         </div>
-        {userData ? <LogoutButton /> : <LoginButton />}
+        {localStorage.accessToken !== '' ? <LogoutButton /> : <LoginButton />}
       </DropdownToggle>
     </UncontrolledDropdown >
   )

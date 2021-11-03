@@ -94,9 +94,9 @@
 }
 .secondWord{
     font-family: Noto Sans KR;
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
-    color: black;
+    color: gray;
     margin:1em;
 }
 .image{
@@ -142,4 +142,24 @@
 .innerFrame{
     text-align: center;
     vertical-align: center;
+}
+
+.ImageWrap {
+	margin: 10px auto;
+	position: relative;
+}
+
+.SaveButton{
+    text-decoration: none;
+}
+
+.innerWord{
+    font-family: Noto Sans KR;
+    color: #D8D8D8;
+    padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
 }

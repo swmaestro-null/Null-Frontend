@@ -3,7 +3,12 @@ import { Fragment } from 'react'
 import UserDropdown from './UserDropdown'
 // ** Third Party Components
 import { Sun, Moon, Menu } from 'react-feather'
-import { NavItem, NavLink, Button } from 'reactstrap'
+import {
+  NavItem, NavLink, Button, DropdownToggle,
+  DropdownMenu,
+  DropdownItem, UncontrolledDropdown
+} from 'reactstrap'
+import * as Icon from 'react-feather'
 import themeConfig from '@configs/themeConfig'
 import Logo from '@src/assets/images/logo/logo2.png'
 import { Link } from 'react-router-dom'
@@ -25,9 +30,25 @@ const NavbarUser = props => {
     <Fragment>
       <ul className='navbar-nav d-xl-none d-flex align-items-center'>
         <NavItem className='mobile-menu mr-auto'>
-          <NavLink className='nav-menu-main menu-toggle hidden-xs is-active' onClick={() => setMenuVisibility(true)}>
-            <Menu className='ficon' />
-          </NavLink>
+          <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
+            <DropdownToggle tag='a' className='nav-menu-main menu-toggle hidden-xs is-active'>
+              <Icon.Menu className='ficon' />
+            </DropdownToggle>
+            <DropdownMenu left>
+              <DropdownItem tag={Link} to='/'>
+                <span className='navbar align-items-center NavWord'>홈</span>
+              </DropdownItem>
+              <DropdownItem tag={Link} to='/second-page'>
+                <span className='navbar align-items-center NavWord'>채색하기</span>
+              </DropdownItem>
+              <DropdownItem tag={Link} to='/Edit'>
+                <span className='navbar align-items-center NavWord'>편집하기</span>
+              </DropdownItem>
+              <DropdownItem tag={Link} to='/pages/pricing'>
+                <span className='navbar align-items-center NavWord'>가격</span>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </NavItem>
       </ul>
       <div>
