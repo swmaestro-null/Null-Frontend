@@ -46,13 +46,13 @@ const settings = {
         {
             breakpoint: 1200, // 화면 사이즈 1200px
             settings: {
-                slidesToShow: 3
+                slidesToShow: 1
             }
         },
         {
             breakpoint: 1023,
             settings: {
-                slidesToShow: 3
+                slidesToShow: 1
             }
         },
         {
@@ -75,12 +75,11 @@ const StyledSlider = styled(Slider)`
 `
 
 const ImageContainer = styled.div`
-  max-height: 600px;
   width: 100%;
 `
 const Image = styled.img`
 width: 100%;
-max-height:600px;
+
 `
 
 const CarouselUncontrolled = () => {
