@@ -143,15 +143,19 @@ const Register = () => {
                         setValErrors({})
                         console.log(res)
                         // setAuthenicationNumber(res)
-                        toast.success(
-                            <Toast />
-                        )
+                        if (res.data.message === "성공적으로 인증 코드를 보냈습니다.") {
+                            toast.success(
+                                <Toast />
+                            )
+                        } else {
+                            alert(res.data.message)
+                        }
                     }
-
                 })
         }
     }
 
+    //인증번호 확인
     const sendConfirm = () => {
         if (isObjEmpty(errors)) {
             useJwt.SendConfirm({ authenticationNumber, email })
@@ -163,11 +167,10 @@ const Register = () => {
                         }
                         setValErrors(arr)
                     } else {
-                        setValErrors({})
                         console.log(res)
                         // setAuthenicationNumber(res)
                     }
-
+                    alert(res.data.message)
                 })
         }
     }

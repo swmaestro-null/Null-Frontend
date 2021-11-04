@@ -296,7 +296,7 @@ const SecondPage = () => {
                 <Label className="input-file-button" onClick={sendImage}>
                   결과확인
                 </Label>
-                <a className="input-file-button SaveButton" href={resultImage} download>저장하기</a>
+                <a className="SaveButton" href={resultImage} download>저장하기</a>
               </div>
               <div className="ImageWrap">
                 <img src={resultImage} className="img-fluid rounded mb-75"></img>
