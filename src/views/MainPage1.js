@@ -10,7 +10,7 @@ function MainPage1() {
                 쉽고 빠른 AI 채색 도우미ColorAid
             </div>
             <div className="SecondMainWord2">
-                이제 스케치 업로드만하면 1초만에 밑색을 채색할 수 있어요!
+                채색 이미지와 스케치 업로드만하면 밑색을 채색할 수 있어요!
             </div>
             <div className="SecondMainWord2">
                 ColorAid와 쉬운 웹툰 제작을 시작해 보세요.

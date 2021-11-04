@@ -54,7 +54,9 @@ const UserDropdown = () => {
     <UncontrolledDropdown tag='li' className='dropdown-user nav-item'>
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
         <div>
-          <Link to='/account-settings'><span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}님, 안녕하세요</span></Link>
+          <Link to='/account-settings'>
+            {localStorage.accessToken !== '' ? <span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}님, 안녕하세요</span> : ''}
+          </Link>
           <Link to='/pages/pricing'><Button.Ripple className="Word" color='primary' style={{ margin: 10 }}>무료 체험</Button.Ripple></Link>
         </div>
         {localStorage.accessToken !== '' ? <LogoutButton /> : <LoginButton />}

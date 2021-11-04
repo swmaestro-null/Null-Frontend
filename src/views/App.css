@@ -100,7 +100,8 @@
     margin:1em;
 }
 .image{
-    margin:1em;
+    margin:5px;
+    height:45;
     min-height: auto;
     max-height: 45;
 }

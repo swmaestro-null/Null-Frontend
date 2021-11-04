@@ -39,20 +39,6 @@ const Home = () => {
         <p className="secondWord">주소: 서울시 강남구 아남타워</p>
         <p className="secondWord">상담문의: 010-1234-5678</p>
       </div>
-      <div className="footerSet">
-        <Button.Ripple color='facebook'>
-          <Facebook size={14} />
-        </Button.Ripple>
-        <Button.Ripple color='twitter'>
-          <Twitter size={14} />
-        </Button.Ripple>
-        <Button.Ripple color='google'>
-          <Mail size={14} />
-        </Button.Ripple>
-        <Button.Ripple className='mr-0' color='github'>
-          <GitHub size={14} />
-        </Button.Ripple>
-      </div>
     </div>
   )
 }

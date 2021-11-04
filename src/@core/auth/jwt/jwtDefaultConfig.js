@@ -1,6 +1,6 @@
 // ** Auth Endpoints
 import axios from 'axios'
-axios.defaults.baseURL = 'http://3.36.243.130:8080'
+axios.defaults.baseURL = 'https://api.coloraid.me'
 
 export default {
   loginEndpoint: '/api/v1/user/login',

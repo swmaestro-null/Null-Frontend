@@ -322,7 +322,7 @@ const SecondPage = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src={img3} alt='swiper 3' className='img-fluid' onClick={ChangeImageFile} />
-                </SwiperSlide>dlfj
+                </SwiperSlide>
                 <SwiperSlide>
                   <img src={img4} alt='swiper 4' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
@@ -334,12 +334,6 @@ const SecondPage = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src={img7} alt='swiper 7' className='img-fluid' onClick={ChangeImageFile} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src={img8} alt='swiper 8' className='img-fluid' />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src={img9} alt='swiper 9' className='img-fluid' />
                 </SwiperSlide>
               </Swiper>
             </CardBody>
