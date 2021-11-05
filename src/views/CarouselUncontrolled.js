@@ -79,6 +79,7 @@ const ImageContainer = styled.div`
 `
 const Image = styled.img`
 width: 100%;
+max-height: 700px;
 
 `
 
