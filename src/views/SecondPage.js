@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 
 import 'tui-image-editor/dist/tui-image-editor.css'
 import ImageEditor from '@toast-ui/react-image-editor'
-import { Typography, Row, Col, Button, Label, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
+import { Spinner, Typography, Row, Col, Button, Label, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 import { isObjEmpty, isUserLoggedIn } from '@utils'
 import { useForm } from 'react-hook-form'
 import useJwt from '@src/auth/jwt/useJwt'
@@ -44,11 +44,17 @@ import result7 from '@src/assets/images/ColorAid/07_color.png'
 
 SwiperCore.use([Navigation, Pagination, EffectFade, EffectCube, EffectCoverflow, Autoplay, Lazy, Virtual])
 
+//progressbar
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
+
 const SecondPage = () => {
   const { register, errors, handleSubmit, trigger } = useForm()
   const [image, setImage] = useState(Small)
   const [sketch, setSketch] = useState(Small)
   const [resultImage, setResult] = useState(Big)
+
+  const [loading, setLoading] = useState(false)
 
   const Example = new Map()
   Example.set(img1, result1)
@@ -86,8 +92,8 @@ const SecondPage = () => {
   }, [])
 
   const sendImage = () => {
-    //참고 이미지
 
+    //참고 이미지
     //formdata인지 아닌지 체크해야함
     const file = dataURLtoFile(image, "reference.png")
     const data = new FormData()
@@ -139,12 +145,14 @@ const SecondPage = () => {
 
         })
     }
+    setLoading(true)
 
     if (isObjEmpty(errors)) {
       useJwt.Colorization(userData.email)
         .then(res => {
           console.log(res.data.data.resultUrl)
           setResult(res.data.data.resultUrl)
+          setLoading(false)
         })
     }
   }
@@ -178,7 +186,6 @@ const SecondPage = () => {
     }
 
   }
-
 
   //예제 이미지로 바꿔주기
   const ChangeImageFile = (event) => {
@@ -269,7 +276,7 @@ const SecondPage = () => {
               </div>
               <div className="ImageWrap">
                 <img src={image} className="img-fluid rounded mb-75"></img>
-                {/* <p className="innerWord">채색된 캐릭터 이미지를 등록해 주세요</p> */}
+                {image === Small ? <p className="innerWord">채색된 캐릭터 이미지를 등록해 주세요</p> : ''}
               </div>
             </div>
 
@@ -286,7 +293,7 @@ const SecondPage = () => {
               </div>
               <div className="ImageWrap">
                 <img src={sketch} className="img-fluid rounded mb-75"></img>
-                {/* <p className="innerWord">채색할 스케치 이미지를 등록해 주세요</p> */}
+                {sketch === Small ? <p className="innerWord">채색할 스케치 이미지를 등록해 주세요</p> : ''}
               </div>
             </div>
           </Col>
@@ -299,8 +306,9 @@ const SecondPage = () => {
                 <a className="SaveButton" href={resultImage} download>저장하기</a>
               </div>
               <div className="ImageWrap">
-                <img src={resultImage} className="img-fluid rounded mb-75"></img>
-                {/* <p className="innerWord">결과 확인 버튼을 눌러 채색된 이미지를 확인 해보세요.</p> */}
+                <img src={resultImage} className="img-fluid rounded mb-75 resultImage"></img>
+                <div className='loading'> {loading ? <Spinner color="primary" /> : ' '}</div>
+                {resultImage === Big && loading === false ? <p className="innerWord">결과 확인 버튼을 눌러 채색된 이미지를 확인 해보세요.</p> : ''}
               </div>
             </div>
           </Col>

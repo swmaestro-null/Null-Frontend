@@ -1,4 +1,4 @@
-import { Button, Row, Col, Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
+import { Spinner, Progress, Button, Row, Col, Card, CardHeader, CardBody, CardTitle, CardText, CardLink } from 'reactstrap'
 import { useRTL } from '@hooks/useRTL'
 import { Facebook, Twitter, Mail, GitHub, HelpCircle, Coffee } from 'react-feather'
 import Logo from '@src/assets/images/logo/logo2.png'
@@ -12,7 +12,7 @@ import SwiperCore, {
   Lazy,
   Virtual
 } from 'swiper'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import './App.css'
 import CarouselUncontrolled from './CarouselUncontrolled'
 import {
@@ -21,10 +21,13 @@ import {
 import MainPage1 from './MainPage1'
 SwiperCore.use([Navigation, Pagination, EffectFade, EffectCube, EffectCoverflow, Autoplay, Lazy, Virtual])
 
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
+
 const Home = () => {
   const [isRtl, setIsRtl] = useRTL()
-
   return (
+
     <div className="back">
       <Card title='Uncontrolled Example' code={carouselUncontrolled}>
         <div>
@@ -39,8 +42,7 @@ const Home = () => {
         <p className="secondWord">주소: 서울시 강남구 아남타워</p>
         <p className="secondWord">상담문의: 010-1234-5678</p>
       </div>
-    </div>
+    </div >
   )
 }
-
 export default Home
