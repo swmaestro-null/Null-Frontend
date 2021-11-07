@@ -43,11 +43,11 @@ const UserDropdown = () => {
   }
 
   const LoginButton = () => {
-    return <Link to='/Login'><Button.Ripple className="Word" color='primary'>로그인</Button.Ripple></Link>
+    return <Link to='/Login'><Button.Ripple className="Word" color='primary'>LogIn</Button.Ripple></Link>
   }
 
   const LogoutButton = () => {
-    return <Link to='/Login'><Button.Ripple className="Word" color='primary' onClick={getOutToken}>로그아웃</Button.Ripple></Link>
+    return <Link to='/Login'><Button.Ripple className="Word" color='primary' onClick={getOutToken}>LogOut</Button.Ripple></Link>
   }
 
   return (
@@ -55,9 +55,9 @@ const UserDropdown = () => {
       <DropdownToggle href='/' tag='a' className='nav-link dropdown-user-link' onClick={e => e.preventDefault()}>
         <div>
           <Link to='/account-settings'>
-            {localStorage.accessToken !== '' ? <span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}님, 안녕하세요</span> : ''}
+            {localStorage.accessToken !== '' ? <span className='user-name font-weight-bold Word' style={{ margin: 10 }}>{(userData && userData['name'])}, Hello!</span> : ''}
           </Link>
-          <Link to='/pages/pricing'><Button.Ripple className="Word" color='primary' style={{ margin: 10 }}>무료 체험</Button.Ripple></Link>
+          {/* <Link to='/pages/pricing'><Button.Ripple className="Word" color='primary' style={{ margin: 10 }}>Trial</Button.Ripple></Link> */}
         </div>
         {localStorage.accessToken !== '' ? <LogoutButton /> : <LoginButton />}
       </DropdownToggle>

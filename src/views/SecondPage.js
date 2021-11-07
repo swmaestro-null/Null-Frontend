@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 
 import 'tui-image-editor/dist/tui-image-editor.css'
-import ImageEditor from '@toast-ui/react-image-editor'
 import { Spinner, Typography, Row, Col, Button, Label, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 import { isObjEmpty, isUserLoggedIn } from '@utils'
 import { useForm } from 'react-hook-form'
@@ -23,6 +22,7 @@ import SwiperCore, {
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import imageToBase64 from 'image-to-base64/browser'
+import styled from 'styled-components'
 //스케치 이미지
 import img1 from '@src/assets/images/ColorAid/01_sketch.png'
 import img2 from '@src/assets/images/ColorAid/02_sketch.png'
@@ -31,8 +31,12 @@ import img4 from '@src/assets/images/ColorAid/04_sketch.png'
 import img5 from '@src/assets/images/ColorAid/05_sketch.png'
 import img6 from '@src/assets/images/ColorAid/06_sketch.png'
 import img7 from '@src/assets/images/ColorAid/07_sketch.png'
-import img8 from '@src/assets/images/banner/banner-37.jpg'
-import img9 from '@src/assets/images/banner/banner-38.jpg'
+import img8 from '@src/assets/images/ColorAid/08_sketch.png'
+import img9 from '@src/assets/images/ColorAid/09_sketch.png'
+import img10 from '@src/assets/images/ColorAid/10_sketch.png'
+import img11 from '@src/assets/images/ColorAid/11_sketch.png'
+import img12 from '@src/assets/images/ColorAid/12_sketch.png'
+import img13 from '@src/assets/images/ColorAid/13_sketch.png'
 
 import result1 from '@src/assets/images/ColorAid/01_color.png'
 import result2 from '@src/assets/images/ColorAid/02_color.png'
@@ -41,6 +45,12 @@ import result4 from '@src/assets/images/ColorAid/04_color.png'
 import result5 from '@src/assets/images/ColorAid/05_color.png'
 import result6 from '@src/assets/images/ColorAid/06_color.png'
 import result7 from '@src/assets/images/ColorAid/07_color.png'
+import result8 from '@src/assets/images/ColorAid/08_color.png'
+import result9 from '@src/assets/images/ColorAid/09_color.png'
+import result10 from '@src/assets/images/ColorAid/10_color.png'
+import result11 from '@src/assets/images/ColorAid/11_color.png'
+import result12 from '@src/assets/images/ColorAid/12_color.png'
+import result13 from '@src/assets/images/ColorAid/13_color.png'
 
 SwiperCore.use([Navigation, Pagination, EffectFade, EffectCube, EffectCoverflow, Autoplay, Lazy, Virtual])
 
@@ -64,6 +74,12 @@ const SecondPage = () => {
   Example.set(img5, result5)
   Example.set(img6, result6)
   Example.set(img7, result7)
+  Example.set(img8, result8)
+  Example.set(img9, result9)
+  Example.set(img10, result10)
+  Example.set(img11, result11)
+  Example.set(img12, result12)
+  Example.set(img13, result13)
 
   const [isRtl, setIsRtl] = useRTL()
 
@@ -243,6 +259,14 @@ const SecondPage = () => {
     }
   }
 
+  const SmallImageSize = styled.img`
+  max-height: 300px;
+  `
+  const ImageSize = styled.img`
+  max-height: 600px;
+
+  `
+
   let profile_preview = null
   if (image !== '') {
     profile_preview = <img src={image}></img>
@@ -265,9 +289,9 @@ const SecondPage = () => {
           <Col lg={{ size: 4, order: 1 }} sm={{ size: 12 }} xs={{ order: 2 }}>
             <div className="innerFrame">
               <div className='d-flex justify-content-around'>
-                <p className="ColorPageWord"> 채색 스타일 이미지</p>
+                <p className="ColorPageWord">Style</p>
                 <Label className="input-file-button" for='firstimage'>
-                  + 파일 업로드
+                  + File Upload
                 </Label>
                 <input id="firstimage" style={{ display: 'none' }} type='file'
                   accept='image/*'
@@ -275,16 +299,17 @@ const SecondPage = () => {
                   onChange={handleFileOnChange} />
               </div>
               <div className="ImageWrap">
-                <img src={image} className="img-fluid rounded mb-75"></img>
-                {image === Small ? <p className="innerWord">채색된 캐릭터 이미지를 등록해 주세요</p> : ''}
+                <SmallImageSize className="img-fluid rounded mb-75" src={image} />
+
+                {image === Small ? <p className="innerWord">Upload Style</p> : ''}
               </div>
             </div>
 
             <div className="innerFrame">
               <div className='d-flex justify-content-around'>
-                <p className="ColorPageWord"> 채색할 이미지</p>
+                <p className="ColorPageWord"> Sketch</p>
                 <Label className="input-file-button" for='secondimage'>
-                  + 파일 업로드
+                  + File Upload
                 </Label>
                 <input id="secondimage" style={{ display: 'none' }} type='file'
                   accept='image/*'
@@ -292,8 +317,8 @@ const SecondPage = () => {
                   onChange={handleFileOnChange2} />
               </div>
               <div className="ImageWrap">
-                <img src={sketch} className="img-fluid rounded mb-75"></img>
-                {sketch === Small ? <p className="innerWord">채색할 스케치 이미지를 등록해 주세요</p> : ''}
+                <SmallImageSize className="img-fluid rounded mb-75" src={sketch} />
+                {sketch === Small ? <p className="innerWord">Upload Sketch</p> : ''}
               </div>
             </div>
           </Col>
@@ -301,14 +326,14 @@ const SecondPage = () => {
             <div className="innerFrame">
               <div className='d-flex justify-content-around'>
                 <Label className="input-file-button" onClick={sendImage}>
-                  결과확인
+                  Result
                 </Label>
-                <a className="SaveButton" href={resultImage} download>저장하기</a>
+                <a className="SaveButton" href={resultImage} download>Save</a>
               </div>
               <div className="ImageWrap">
-                <img src={resultImage} className="img-fluid rounded mb-75 resultImage"></img>
+                <ImageSize className="img-fluid rounded mb-75 resultImage" src={resultImage} />
                 <div className='loading'> {loading ? <Spinner color="primary" /> : ' '}</div>
-                {resultImage === Big && loading === false ? <p className="innerWord">결과 확인 버튼을 눌러 채색된 이미지를 확인 해보세요.</p> : ''}
+                {resultImage === Big && loading === false ? <p className="innerWord">Push Result Button</p> : ''}
               </div>
             </div>
           </Col>
@@ -318,7 +343,7 @@ const SecondPage = () => {
         <Col sm='12'>
           <Card>
             <CardHeader>
-              <CardTitle className="ColorPageWord" tag='h4'>예제 이미지</CardTitle>
+              <CardTitle className="ColorPageWord" tag='h4'>Example Image</CardTitle>
             </CardHeader>
             <CardBody>
               <Swiper dir={isRtl ? 'rtl' : 'ltr'} {...params}>
@@ -342,6 +367,24 @@ const SecondPage = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <img src={img7} alt='swiper 7' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img8} alt='swiper 8' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img9} alt='swiper 9' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img10} alt='swiper 10' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img11} alt='swiper 11' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img12} alt='swiper 12' className='img-fluid' onClick={ChangeImageFile} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src={img13} alt='swiper 13' className='img-fluid' onClick={ChangeImageFile} />
                 </SwiperSlide>
               </Swiper>
             </CardBody>

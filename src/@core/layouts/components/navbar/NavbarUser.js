@@ -36,16 +36,16 @@ const NavbarUser = props => {
             </DropdownToggle>
             <DropdownMenu left>
               <DropdownItem tag={Link} to='/'>
-                <span className='navbar align-items-center NavWord'>홈</span>
+                <span className='navbar align-items-center NavWord'>Home</span>
               </DropdownItem>
               <DropdownItem tag={Link} to='/second-page'>
-                <span className='navbar align-items-center NavWord'>채색하기</span>
+                <span className='navbar align-items-center NavWord'>Coloring</span>
               </DropdownItem>
               <DropdownItem tag={Link} to='/Edit'>
-                <span className='navbar align-items-center NavWord'>편집하기</span>
+                <span className='navbar align-items-center NavWord'>Edit</span>
               </DropdownItem>
               <DropdownItem tag={Link} to='/pages/pricing'>
-                <span className='navbar align-items-center NavWord'>가격</span>
+                <span className='navbar align-items-center NavWord'>Price</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
@@ -58,10 +58,10 @@ const NavbarUser = props => {
               <span className='brand-logo'>
                 <img src={Logo} style={{ height: 50 }} alt='logo' />
               </span>
-              <Link to='/' className='navbar align-items-center NavWord'>홈</Link>
-              <Link to='/second-page' className='navbar align-items-center NavWord'>채색하기</Link>
-              <Link to='/Edit' className='navbar align-items-center NavWord'>편집하기</Link>
-              <Link to='/pages/pricing' className='navbar align-items-center NavWord'>가격</Link>
+              <Link to='/' className='navbar align-items-center NavWord'>Home</Link>
+              <Link to='/second-page' className='navbar align-items-center NavWord'>Coloring</Link>
+              <Link to='/Edit' className='navbar align-items-center NavWord'>Edit</Link>
+              {/* <Link to='/pages/pricing' className='navbar align-items-center NavWord'>Price</Link> */}
             </NavLink>
           </NavLink>
         </NavItem>

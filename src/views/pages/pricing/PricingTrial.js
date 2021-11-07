@@ -11,7 +11,7 @@ const PricingTrial = () => {
               <h3 className='text-primary'>Still not convinced? Start with a 14-day FREE trial!</h3>
               <h5>You will get full access to with all the features for 14 days.</h5>
               <div className='mt-2 mt-lg-3'>
-                <Button.Ripple color='primary'>Start 14-day FREE trial</Button.Ripple>
+                <Button.Ripple className="secondWord" color='primary'>무료 14일로 시작하기</Button.Ripple>
               </div>
             </div>
             <img

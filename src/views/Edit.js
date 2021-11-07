@@ -14,8 +14,8 @@ const Edit = () => (
     <ImageEditor
         includeUI={{
             loadImage: {
-                path: 'img/sampleImage.jpg',
-                name: 'SampleImage'
+                path: '',
+                name: ''
             },
             theme: myTheme,
             menu: ['shape', 'filter', 'draw', 'crop', 'flip', 'icon', 'rotate', 'mask'],

@@ -182,4 +182,5 @@
 }
 .resultImage{
     z-index: 1;
+    max-height: 500;
 }
